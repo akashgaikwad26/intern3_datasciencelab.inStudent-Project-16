@@ -1,0 +1,61 @@
+-- Create the Users table
+CREATE TABLE Users (
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    role VARCHAR(20) CHECK (role IN ('admin', 'manager', 'member')) NOT NULL,
+    preferences JSONB DEFAULT '{}',
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Create the Projects table
+CREATE TABLE Projects (
+    project_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    deadline DATE,
+    created_by INT NOT NULL REFERENCES Users(user_id) ON DELETE CASCADE,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Create the Tasks table
+CREATE TABLE Tasks (
+    task_id SERIAL PRIMARY KEY,
+    project_id INT NOT NULL REFERENCES Projects(project_id) ON DELETE CASCADE,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    status VARCHAR(20) CHECK (status IN ('todo', 'in-progress', 'completed')) DEFAULT 'todo',
+    priority VARCHAR(20) CHECK (priority IN ('low', 'medium', 'high')) DEFAULT 'medium',
+    assigned_to INT REFERENCES Users(user_id) ON DELETE SET NULL,
+    due_date DATE,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Create the Messages table
+CREATE TABLE Messages (
+    message_id SERIAL PRIMARY KEY,
+    sender_id INT NOT NULL REFERENCES Users(user_id) ON DELETE CASCADE,
+    project_id INT REFERENCES Projects(project_id) ON DELETE CASCADE,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Create the Notifications table
+CREATE TABLE Notifications (
+    notification_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL REFERENCES Users(user_id) ON DELETE CASCADE,
+    message TEXT NOT NULL,
+    type VARCHAR(20) CHECK (type IN ('task_update', 'project_change', 'mention')) NOT NULL,
+    is_read BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Add indexing for common queries
+CREATE INDEX idx_users_role ON Users(role);
+CREATE INDEX idx_tasks_project_id ON Tasks(project_id);
+CREATE INDEX idx_messages_project_id ON Messages(project_id);
+CREATE INDEX idx_notifications_user_id ON Notifications(user_id);
