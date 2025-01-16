@@ -1,6 +1,6 @@
 const { hash } = require("bcrypt");
 const error = require("../../utils/error");
-const { returnData } = require("../../utils/returnData");
+const { sendResponse } = require("../../utils/sendResponse");
 const { TABLE_USERS } = require("../../Constants/Constants");
 const { getResponse } = require("../../utils/getResponse");
 
@@ -15,7 +15,7 @@ async function signUp(req, res) {
       [username, email, hashedPassword, role]
     );
     console.log("result", result);
-    returnData(res, result);
+    sendResponse(res, result);
   } catch (err) {
     error(res, 500, err.message);
   }

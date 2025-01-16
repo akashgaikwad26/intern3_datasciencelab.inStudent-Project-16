@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Welcome } from "../Welcome";
+import { Welcome } from "../Welcome/Welcome";
 import { LoginForm } from "./LoginForm";
 import { fetchRelevantData } from "./utils/fetchRelevantData";
 

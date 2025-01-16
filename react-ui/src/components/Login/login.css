@@ -1,7 +1,7 @@
 /* General Page Styling */
 body {
   font-family: "Arial", sans-serif;
-  background: #fff;
+  background-color: #f5f5f5;
   height: 100vh;
   margin: 0;
   position: relative;
@@ -37,6 +37,17 @@ body {
   text-align: left;
 }
 
+.login-form form .error {
+  color: rgb(255, 91, 91);
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid rgb(255, 91, 91);
+  border-radius: 8px;
+  background-color: hsl(0, 70%, 95%);
+  padding: 12px;
+  transition: border-color 0.3s ease;
+}
+
 .login-form label {
   display: block;
   margin-bottom: 8px;
@@ -67,6 +78,8 @@ body {
   border: none;
   border-radius: 8px;
   font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
