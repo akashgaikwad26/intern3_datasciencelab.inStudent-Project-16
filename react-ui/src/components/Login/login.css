@@ -26,6 +26,11 @@ body {
   color: #333;
 }
 
+.login-form img {
+  height: 70px;
+  width: 70px;
+}
+
 /* Input Groups */
 .login-form form div {
   margin-bottom: 20px;
