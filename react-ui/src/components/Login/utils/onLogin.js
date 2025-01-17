@@ -28,6 +28,6 @@ export const onLogin = async (
     setIsLoggedIn(true);
   } catch (error) {
     console.error("Login failed:", error);
-    setError({ isError: true, message: error.response.data.error });
+    setError({ isError: true, message: "Invalid email or password" });
   }
 };
