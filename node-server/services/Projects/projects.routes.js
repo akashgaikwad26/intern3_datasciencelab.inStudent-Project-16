@@ -7,12 +7,12 @@ const { allProjects } = require("./AllProjects");
 const projectRouter = Router();
 
 // Create a new project
-projectRouter.post("/", authenticateToken, async (req, res) => {
+projectRouter.post("/", async (req, res) => {
   await createNewProject(req, res);
 });
 
 // Get all projects
-projectRouter.get("/", authenticateToken, async (req, res) => {
+projectRouter.get("/", async (req, res) => {
   await allProjects(req, res);
 });
 
