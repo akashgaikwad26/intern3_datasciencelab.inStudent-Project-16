@@ -24,9 +24,9 @@ app.use(cors());
 // Use routers
 app.use("/users", userRouter);
 app.use("/projects", projectRouter);
-app.use("/tasks", taskRouter);
-app.use("/messages", messageRouter);
-app.use("/notifications", notificationRouter);
+// app.use("/tasks", taskRouter);
+// app.use("/messages", messageRouter);
+// app.use("/notifications", notificationRouter);
 
 // Start the server
 const PORT = process.env.PORT || 8000;

@@ -1,16 +1,18 @@
 import { collab_icon } from "assets/images/ExportImages";
 import { useState } from "react";
 import "./login.css";
-import { onLogin } from "./utils/onLogin";
+import { useLogin } from "./utils/onLogin";
 
 export function LoginForm({ setUser, setIsLoggedIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState({ isError: false, message: "" });
+
+  const { onLogin, error } = useLogin();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onLogin(email, password, setUser, setIsLoggedIn, setError);
+    // onLogin(email, password, setUser, setIsLoggedIn, setError);
+    onLogin(email, password);
   };
 
   return (
