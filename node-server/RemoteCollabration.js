@@ -9,13 +9,17 @@ const { messageRouter } = require("./services/Message/message.routes");
 const {
   notificationRouter,
 } = require("./services/Notifications/notification.routes");
-
+const schedule = require('node-schedule');
+const { notificationCronJob } = require("./CronJobs/Notification.CronJob");
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 //  ****************************************************************
+
+// cron jobs                      s m h d mo dow
+// let jobs = schedule.scheduleJob('*/5 * * * * *',notificationCronJob)
 
 // Use routers
 app.use("/users", userRouter);
